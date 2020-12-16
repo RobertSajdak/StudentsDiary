@@ -1,16 +1,13 @@
 ﻿
+using System;
+using System.Windows.Forms;
+
 namespace StudentsDiary
 {
     partial class Main
-    {
-        /// <summary>
-        /// Wymagana zmienna projektanta.
-        /// </summary>
+    {        
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Wyczyść wszystkie używane zasoby.
-        /// </summary>
+               
         /// <param name="disposing">prawda, jeżeli zarządzane zasoby powinny zostać zlikwidowane; Fałsz w przeciwnym wypadku.</param>
         protected override void Dispose(bool disposing)
         {
@@ -47,6 +44,7 @@ namespace StudentsDiary
             this.btnAdd.Text = "Dodaj";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            
             // 
             // btnEdit
             // 
@@ -116,6 +114,16 @@ namespace StudentsDiary
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
             this.ResumeLayout(false);
 
+        }
+
+        private void dgvDiary_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

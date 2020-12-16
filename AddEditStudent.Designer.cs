@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace StudentsDiary
 {
     partial class AddEditStudent
@@ -250,7 +252,11 @@ namespace StudentsDiary
             this.Load += new System.EventHandler(this.AddEditStudent_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+        }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -1,106 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace StudentsDiary
 {
     public partial class AddEditStudent : Form
     {
-        private string _filePath =
-           Path.Combine(Environment.CurrentDirectory, "students.txt");
         private int _studentId;
+        private Student _student;
+
+        private FileHelper<List<Student>> _fileHelper =
+             new FileHelper<List<Student>>(Program.FilePath);
 
         public AddEditStudent(int id = 0)
         {
             InitializeComponent();
             _studentId = id;
 
-            if(id != 0)
+            GetStudentData();
+            tbFirstName.Select(); //metoda, która aktywuje od razu pole Imię w oknie danych ucznia, po kliknięciu przycisku "Dodaj".
+        }           
+
+        private void GetStudentData()
+        {
+            if (_studentId != 0)
             {
                 Text = "Edytowanie danych ucznia";
-                
-                var students = DeserializeFromFile(); //pobranie danych o uczniach z pliku
-                var student = students.FirstOrDefault(x => x.Id == id); //pobranie z listy pierwszego ucznia, który ma określone Id, przekazane wcześniej do konstruktora.
+
+                var students = _fileHelper.DeserializeFromFile(); //pobranie danych o uczniach z pliku
+                _student = students.FirstOrDefault(x => x.Id == _studentId); //pobranie z listy pierwszego ucznia, który ma określone Id, przekazane wcześniej do konstruktora.
                 //Jeżeli nie będzie takiego ucznia, zwrócony zostanie "null".
 
-                if(student == null) //obsługa wyjątku, gdy nie ma ucznia o podanym Id
+                if (_student == null) //obsługa wyjątku, gdy nie ma ucznia o podanym Id
                     throw new Exception("Brak użytkownika o podanym Id.");
 
-                tbId.Text = student.Id.ToString(); //przypisanie danych ucznia do pól na formatce
-                tbFirstName.Text = student.FirstName; //do właściwości Text pola tekstowego przypisujemy dane ucznia
-                tbLastName.Text = student.LastName;
-                tbMath.Text = student.Math;
-                tbPhisics.Text = student.Physics;
-                tbTechnology.Text = student.Technology;
-                tbPolishLang.Text = student.PolishLang;
-                tbEnglishLang.Text = student.EnglishLang;
-                rtbComments.Text = student.Comments;
-            }
-
-            tbFirstName.Select(); //metoda, która aktywuje od razu pole Imię w oknie danych ucznia, po kliknięciu przycisku "Dodaj".
-        }
-        public void SerializeToFile(List<Student> students)
-        {
-            var serializer = new XmlSerializer(typeof(List<Student>));
-
-            using (var streamWriter = new StreamWriter(_filePath))
-            {
-                serializer.Serialize(streamWriter, students);
-                streamWriter.Close();
+                FillTextBoxes();
             }
         }
 
-        public List<Student> DeserializeFromFile()
+        private void FillTextBoxes()
         {
-            if (!File.Exists(_filePath))
-                return new List<Student>();
-
-            var serializer = new XmlSerializer(typeof(List<Student>));
-
-            using (var streamReader = new StreamReader(_filePath))
-            {
-                var students = (List<Student>)serializer.Deserialize(streamReader);
-                streamReader.Close();
-                return students;
-            }
+            tbId.Text = _student.Id.ToString(); //przypisanie danych ucznia do pól na formatce
+            tbFirstName.Text = _student.FirstName; //do właściwości Text pola tekstowego przypisujemy dane ucznia
+            tbLastName.Text = _student.LastName;
+            tbMath.Text = _student.Math;
+            tbPhisics.Text = _student.Physics;
+            tbTechnology.Text = _student.Technology;
+            tbPolishLang.Text = _student.PolishLang;
+            tbEnglishLang.Text = _student.EnglishLang;
+            rtbComments.Text = _student.Comments;
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            var students = DeserializeFromFile();
+            var students = _fileHelper.DeserializeFromFile();
 
-            if (_studentId != 0) //sprawdzamy jakie Id ucznia zostało przekazane przez konstruktor
-            {
-                students.RemoveAll(x => x.Id == _studentId);
-            }
-            else
-            {
-                var studentWithHighestId = students.OrderByDescending(x => x.Id).FirstOrDefault();
+            if (_studentId != 0) //sprawdzamy jakie Id ucznia zostało przekazane przez konstruktor            
+                students.RemoveAll(x => x.Id == _studentId);            
+            else            
+                AssignIdToNewStudent(students);
 
-                //var studentId = 0;
-
-                //if (studentWithHighestId == null)
-                //{
-                //    studentId = 1;
-                //}
-                //else
-                //{
-                //    studentId = studentWithHighestId.Id + 1;
-                //}
-
-                //INNA FORMUŁA POWYŻSZEGO ZAPISU:
-                var _studentId = studentWithHighestId == null ?
-                    1 : studentWithHighestId.Id + 1;
-            }
-
+            AddNewUserToList(students);
+            
+            _fileHelper.SerializeToFile(students); //przekazanie całej listy studentów do pliku
+            
+            Close(); //wywołanie metody, która zamknie formatkę, w której dodawany był nowy uczeń (obiekt)
+        }
+       
+        private void AddNewUserToList(List<Student> students)
+        {
             var student = new Student //stworzenie nowego obiektu klasy Student
             {
                 Id = _studentId, //inicjalizacja poszczególnych pól dla obiektu
@@ -115,17 +85,16 @@ namespace StudentsDiary
             };
 
             students.Add(student); //dodanie stworzonego obiektu do listy studentów
-
-            SerializeToFile(students); //przekazanie całej listy studentów do pliku
-
-            Close(); //wywołanie metody, która zamknie formatkę, w której dodawany był nowy uczeń (obiekt)
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void AssignIdToNewStudent(List<Student> students)
         {
-            Close();
-        }
+            var studentWithHighestId = students.OrderByDescending(x => x.Id).FirstOrDefault();
 
+            _studentId = studentWithHighestId == null ?
+                1 : studentWithHighestId.Id + 1;
+        }
+            
         private void AddEditStudent_Load(object sender, EventArgs e)
         {
 

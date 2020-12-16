@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace StudentsDiary
 {
     static class Program
     {
-        /// <summary>
-        /// Główny punkt wejścia dla aplikacji.
-        /// </summary>
+        public static string FilePath =
+            Path.Combine(Environment.CurrentDirectory, "students.txt");
+
         [STAThread]
         static void Main()
         {
