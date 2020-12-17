@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace StudentsDiary
@@ -44,7 +43,6 @@ namespace StudentsDiary
             this.btnAdd.Text = "Dodaj";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            
             // 
             // btnEdit
             // 
@@ -95,7 +93,6 @@ namespace StudentsDiary
             this.dgvDiary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDiary.Size = new System.Drawing.Size(1112, 490);
             this.dgvDiary.TabIndex = 4;
-            this.dgvDiary.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDiary_CellContentClick);
             // 
             // Main
             // 
@@ -110,20 +107,10 @@ namespace StudentsDiary
             this.Controls.Add(this.btnAdd);
             this.Name = "Main";
             this.Text = "Dziennik Ucznia";
-            this.Load += new System.EventHandler(this.Main_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
             this.ResumeLayout(false);
 
-        }
-
-        private void dgvDiary_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Main_Load(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

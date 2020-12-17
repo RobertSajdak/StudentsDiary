@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentsDiary
@@ -53,7 +55,7 @@ namespace StudentsDiary
             rtbComments.Text = _student.Comments;
         }
 
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private async void btnConfirm_Click(object sender, EventArgs e)
         {
             var students = _fileHelper.DeserializeFromFile();
 
@@ -65,8 +67,18 @@ namespace StudentsDiary
             AddNewUserToList(students);
             
             _fileHelper.SerializeToFile(students); //przekazanie całej listy studentów do pliku
-            
+
+            await LongProcessAsync();
+
             Close(); //wywołanie metody, która zamknie formatkę, w której dodawany był nowy uczeń (obiekt)
+        }
+       
+        private async Task LongProcessAsync()
+        {
+            await Task.Run(() =>
+                {
+                    Thread.Sleep(3000);
+                });
         }
        
         private void AddNewUserToList(List<Student> students)
