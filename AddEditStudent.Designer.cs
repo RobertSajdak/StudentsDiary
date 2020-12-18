@@ -51,6 +51,7 @@ namespace StudentsDiary
             this.label8 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // tbId
@@ -186,7 +187,7 @@ namespace StudentsDiary
             // 
             this.rtbComments.Location = new System.Drawing.Point(121, 236);
             this.rtbComments.Name = "rtbComments";
-            this.rtbComments.Size = new System.Drawing.Size(244, 96);
+            this.rtbComments.Size = new System.Drawing.Size(244, 26);
             this.rtbComments.TabIndex = 16;
             this.rtbComments.Text = "";
             // 
@@ -219,11 +220,24 @@ namespace StudentsDiary
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AccessibleDescription = "";
+            this.checkBox1.AccessibleName = "";
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(16, 276);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(148, 21);
+            this.checkBox1.TabIndex = 20;
+            this.checkBox1.Text = "Zajęcia dodatkowe";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // AddEditStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 382);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label8);
@@ -252,6 +266,7 @@ namespace StudentsDiary
             this.Load += new System.EventHandler(this.AddEditStudent_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -281,5 +296,6 @@ namespace StudentsDiary
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

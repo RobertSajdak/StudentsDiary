@@ -12,7 +12,8 @@ namespace StudentsDiary
         public string Technology { get; set; }
         public string Physics { get; set; }
         public string PolishLang { get; set; }
-        public string EnglishLang { get; set; }            
+        public string EnglishLang { get; set; }
+        public bool AdditionalClasses { get; set; }
     }
 
     public class Teacher : Person

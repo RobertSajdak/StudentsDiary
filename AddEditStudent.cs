@@ -23,7 +23,7 @@ namespace StudentsDiary
 
             GetStudentData();
             tbFirstName.Select(); //metoda, która aktywuje od razu pole Imię w oknie danych ucznia, po kliknięciu przycisku "Dodaj".
-        }           
+        }
 
         private void GetStudentData()
         {
@@ -53,7 +53,8 @@ namespace StudentsDiary
             tbPolishLang.Text = _student.PolishLang;
             tbEnglishLang.Text = _student.EnglishLang;
             rtbComments.Text = _student.Comments;
-        }
+            checkBox1.Checked = _student.AdditionalClasses;
+        }            
 
         private async void btnConfirm_Click(object sender, EventArgs e)
         {
@@ -94,6 +95,7 @@ namespace StudentsDiary
                 Physics = tbPhisics.Text,
                 PolishLang = tbPolishLang.Text,
                 Technology = tbTechnology.Text,
+                AdditionalClasses = checkBox1.Checked,
             };
 
             students.Add(student); //dodanie stworzonego obiektu do listy studentów

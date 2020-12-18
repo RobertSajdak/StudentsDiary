@@ -7,7 +7,6 @@ namespace StudentsDiary
 {
     public partial class Main : Form
     {
-       
         private FileHelper<List<Student>> _fileHelper = 
             new FileHelper<List<Student>>(Program.FilePath);
 
@@ -52,7 +51,8 @@ namespace StudentsDiary
             dgvDiary.Columns[5].HeaderText = "Technologia";
             dgvDiary.Columns[6].HeaderText = "Fizyka";
             dgvDiary.Columns[7].HeaderText = "Język polski";
-            dgvDiary.Columns[8].HeaderText = "Język angielski";            
+            dgvDiary.Columns[8].HeaderText = "Język angielski";
+            dgvDiary.Columns[9].HeaderText = "Zajęcia dodatkowe";            
         }        
        
         private void btnAdd_Click(object sender, EventArgs e)
