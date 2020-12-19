@@ -54,6 +54,7 @@ namespace StudentsDiary
             tbEnglishLang.Text = _student.EnglishLang;
             rtbComments.Text = _student.Comments;
             checkBox1.Checked = _student.AdditionalClasses;
+            cboxIdClass.Items = _student.IdGroup;
         }            
 
         private async void btnConfirm_Click(object sender, EventArgs e)
@@ -69,8 +70,6 @@ namespace StudentsDiary
             
             _fileHelper.SerializeToFile(students); //przekazanie całej listy studentów do pliku
 
-            await LongProcessAsync();
-
             Close(); //wywołanie metody, która zamknie formatkę, w której dodawany był nowy uczeń (obiekt)
         }
        
@@ -78,10 +77,10 @@ namespace StudentsDiary
         {
             await Task.Run(() =>
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                 });
         }
-       
+
         private void AddNewUserToList(List<Student> students)
         {
             var student = new Student //stworzenie nowego obiektu klasy Student
@@ -96,6 +95,7 @@ namespace StudentsDiary
                 PolishLang = tbPolishLang.Text,
                 Technology = tbTechnology.Text,
                 AdditionalClasses = checkBox1.Checked,
+                IdGroup = cboxIdClass.Items,
             };
 
             students.Add(student); //dodanie stworzonego obiektu do listy studentów
@@ -112,6 +112,11 @@ namespace StudentsDiary
         private void AddEditStudent_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void cboxIdClass_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          
         }
     }
 }

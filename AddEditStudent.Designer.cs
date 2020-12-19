@@ -52,6 +52,8 @@ namespace StudentsDiary
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cboxIdClass = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbId
@@ -225,18 +227,51 @@ namespace StudentsDiary
             this.checkBox1.AccessibleDescription = "";
             this.checkBox1.AccessibleName = "";
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 276);
+            this.checkBox1.Location = new System.Drawing.Point(217, 270);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(148, 21);
             this.checkBox1.TabIndex = 20;
             this.checkBox1.Text = "Zajęcia dodatkowe";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // cboxIdClass
+            // 
+            this.cboxIdClass.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboxIdClass.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboxIdClass.DropDownHeight = 100;
+            this.cboxIdClass.FormattingEnabled = true;
+            this.cboxIdClass.IntegralHeight = false;
+            this.cboxIdClass.Items.AddRange(new object[] {
+            "I-A",
+            "I-B",
+            "I-C",
+            "II-A",
+            "II-B",
+            "III-A",
+            "IV-A"});
+            this.cboxIdClass.Location = new System.Drawing.Point(121, 268);
+            this.cboxIdClass.Name = "cboxIdClass";
+            this.cboxIdClass.Size = new System.Drawing.Size(81, 24);
+            this.cboxIdClass.Sorted = true;
+            this.cboxIdClass.TabIndex = 21;
+            this.cboxIdClass.SelectedIndexChanged += new System.EventHandler(this.cboxIdClass_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 274);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(92, 17);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Klasa ucznia:";
+            // 
             // AddEditStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 382);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.cboxIdClass);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnCancel);
@@ -297,5 +332,7 @@ namespace StudentsDiary
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox cboxIdClass;
+        private System.Windows.Forms.Label label9;
     }
 }

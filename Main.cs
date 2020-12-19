@@ -53,6 +53,7 @@ namespace StudentsDiary
             dgvDiary.Columns[7].HeaderText = "Język polski";
             dgvDiary.Columns[8].HeaderText = "Język angielski";
             dgvDiary.Columns[9].HeaderText = "Zajęcia dodatkowe";            
+            dgvDiary.Columns[10].HeaderText = "Klasa ucznia";            
         }        
        
         private void btnAdd_Click(object sender, EventArgs e)

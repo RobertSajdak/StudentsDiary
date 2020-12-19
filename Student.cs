@@ -14,6 +14,7 @@ namespace StudentsDiary
         public string PolishLang { get; set; }
         public string EnglishLang { get; set; }
         public bool AdditionalClasses { get; set; }
+        public int IdGroup { get; set; }
     }
 
     public class Teacher : Person
