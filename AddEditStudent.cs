@@ -12,6 +12,7 @@ namespace StudentsDiary
     {
         private int _studentId;
         private Student _student;
+        private Group _groups;
 
         private FileHelper<List<Student>> _fileHelper =
              new FileHelper<List<Student>>(Program.FilePath);
@@ -54,7 +55,7 @@ namespace StudentsDiary
             tbEnglishLang.Text = _student.EnglishLang;
             rtbComments.Text = _student.Comments;
             checkBox1.Checked = _student.AdditionalClasses;
-            cboxIdClass.Items = _student.IdGroup;
+            cboxIdClass.SelectedItem = _groups.First(x => x.Id == _student.IdGroup);
         }            
 
         private async void btnConfirm_Click(object sender, EventArgs e)
@@ -95,7 +96,7 @@ namespace StudentsDiary
                 PolishLang = tbPolishLang.Text,
                 Technology = tbTechnology.Text,
                 AdditionalClasses = checkBox1.Checked,
-                IdGroup = cboxIdClass.Items,
+                IdGroup = (cboxIdClass.SelectedItem as Group).Id //do właściwosci przypisujemy ID wybranej grupy
             };
 
             students.Add(student); //dodanie stworzonego obiektu do listy studentów

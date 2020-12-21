@@ -25,6 +25,7 @@ namespace StudentsDiary
         public Main()
         {
             InitializeComponent();
+            InitializeGroups();
             RefreshDiary();   
             
             SetColumnsHeader();   
@@ -33,7 +34,30 @@ namespace StudentsDiary
             {
                 WindowState = FormWindowState.Maximized;
             }
-        }      
+        }
+
+        private List<Group> _groups;
+
+        private void InitializeGroups()
+        {
+            _groups = new List<Group>
+    {
+        new Group { Id = 0, Name = "--BRAK--" },
+        new Group { Id = 1, Name = "1a" },
+        new Group { Id = 2, Name = "1b" },
+        new Group { Id = 3, Name = "1c" },
+        new Group { Id = 4, Name = "2a" },
+        new Group { Id = 5, Name = "2b" },
+        new Group { Id = 6, Name = "3a" },
+        new Group { Id = 7, Name = "3b" },
+        new Group { Id = 8, Name = "4a" },
+    };
+            cboxIdClass.DataSource = _groups;//ustawiamy listę jako source dla comboboxa
+            cboxIdClass.DisplayMember = "Name";//chcemy wyswietlać w aplikacji "Name"
+            cboxIdClass.ValueMember = "Id";//w kodzie bedziemy odnosic sie poprzed "Id"
+            cboxIdClass.SelectedIndex = 0;//na wstępie będzie zaznaczona pierwsza grupa, z indexem 0
+        }
+
 
         private void RefreshDiary()
         {
@@ -53,7 +77,8 @@ namespace StudentsDiary
             dgvDiary.Columns[7].HeaderText = "Język polski";
             dgvDiary.Columns[8].HeaderText = "Język angielski";
             dgvDiary.Columns[9].HeaderText = "Zajęcia dodatkowe";            
-            dgvDiary.Columns[10].HeaderText = "Klasa ucznia";            
+            dgvDiary.Columns[10].HeaderText = "Klasa ucznia";
+            dgvDiary.Columns[nameof(Student.IdGroup)].Visible = false;
         }        
        
         private void btnAdd_Click(object sender, EventArgs e)
