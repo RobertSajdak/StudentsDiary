@@ -12,18 +12,34 @@ namespace StudentsDiary
     {
         private int _studentId;
         private Student _student;
-        private Group _groups;
-
+        private List<Group> _groups;
+          
         private FileHelper<List<Student>> _fileHelper =
              new FileHelper<List<Student>>(Program.FilePath);
 
-        public AddEditStudent(int id = 0)
+        public AddEditStudent(int id = 0) //konstruktor klasy
         {
             InitializeComponent();
+            InitializeGroups();
+
             _studentId = id;
 
             GetStudentData();
             tbFirstName.Select(); //metoda, która aktywuje od razu pole Imię w oknie danych ucznia, po kliknięciu przycisku "Dodaj".
+        }
+
+        private void InitializeGroups()
+        {
+            _groups = new List<Group>();//inicjalizacja listy grup (wszystkich klas uczniów),
+            _groups.Add(new Group { Id = 0, Name = "--Brak klasy--" });//dodanie do listy grupy "Brak klasy",
+            _groups.Add(new Group { Id = 1, Name = "Klasa 1" });//dodanie do listy 1 klasy,
+            _groups.Add(new Group { Id = 2, Name = "Klasa 2" });//dodanie do listy 2 klasy,
+            _groups.Add(new Group { Id = 3, Name = "Klasa 3" });//dodanie do listy 3 klasy,
+
+            cboxIdClass.DataSource = _groups;//ustawiamy naszą listę, która ma w sobie informacje o wszystkich grupach jako źródło tego comboboxa, dzięki temu grupy będą już się wyświetlać na formatce
+            cboxIdClass.DisplayMember = "Name";//chcemy, by użytkownik widział wartość właściwości Name. Czyli żeby nauczyciel na formatce widział nazwy Klasa 1, Klasa 2, Klasa 3, itd.
+            cboxIdClass.ValueMember = "Id";//w kodzie interesuje nas identyfikator, czyli do pliku, a konkretnie do właściwości IdGroup ucznia przypisujemy wartość identyfikatora.
+            cboxIdClass.SelectedIndex = 0;//po uruchomieniu formatki chcemy żeby na początek jako domyślna grupa była zaznaczona grupa o Id 0, czyli grupa "Brak klasy".
         }
 
         private void GetStudentData()
@@ -55,7 +71,7 @@ namespace StudentsDiary
             tbEnglishLang.Text = _student.EnglishLang;
             rtbComments.Text = _student.Comments;
             checkBox1.Checked = _student.AdditionalClasses;
-            cboxIdClass.SelectedItem = _groups.First(x => x.Id == _student.IdGroup);
+            cboxIdClass.SelectedItem = _groups.First(x => x.Id == _student.IdGroup);//do właściwości SelectedItem comboboxa przypisujemy odpowiednią grupę z naszej listy. Czyli za pomocą LINQ szukamy grupy, która ma takie id - jak nasz wybrany (edytowany) uczeń. Używamy do tego First, która znajdzie pierwszą (a właściwie jedyną) grupą o takim id.
         }            
 
         private async void btnConfirm_Click(object sender, EventArgs e)

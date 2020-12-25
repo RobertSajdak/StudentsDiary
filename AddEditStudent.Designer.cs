@@ -241,14 +241,6 @@ namespace StudentsDiary
             this.cboxIdClass.DropDownHeight = 100;
             this.cboxIdClass.FormattingEnabled = true;
             this.cboxIdClass.IntegralHeight = false;
-            this.cboxIdClass.Items.AddRange(new object[] {
-            "I-A",
-            "I-B",
-            "I-C",
-            "II-A",
-            "II-B",
-            "III-A",
-            "IV-A"});
             this.cboxIdClass.Location = new System.Drawing.Point(121, 268);
             this.cboxIdClass.Name = "cboxIdClass";
             this.cboxIdClass.Size = new System.Drawing.Size(81, 24);

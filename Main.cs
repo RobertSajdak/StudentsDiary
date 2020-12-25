@@ -41,23 +41,13 @@ namespace StudentsDiary
         private void InitializeGroups()
         {
             _groups = new List<Group>
-    {
-        new Group { Id = 0, Name = "--BRAK--" },
-        new Group { Id = 1, Name = "1a" },
-        new Group { Id = 2, Name = "1b" },
-        new Group { Id = 3, Name = "1c" },
-        new Group { Id = 4, Name = "2a" },
-        new Group { Id = 5, Name = "2b" },
-        new Group { Id = 6, Name = "3a" },
-        new Group { Id = 7, Name = "3b" },
-        new Group { Id = 8, Name = "4a" },
+        {
+            new Group { Id = 0, Name = "--Brak klasy--" },
+            new Group { Id = 1, Name = "1" },
+            new Group { Id = 2, Name = "Klasa 2" },
+            new Group { Id = 3, Name = "Klasa 3" },
     };
-            cboxIdClass.DataSource = _groups;//ustawiamy listę jako source dla comboboxa
-            cboxIdClass.DisplayMember = "Name";//chcemy wyswietlać w aplikacji "Name"
-            cboxIdClass.ValueMember = "Id";//w kodzie bedziemy odnosic sie poprzed "Id"
-            cboxIdClass.SelectedIndex = 0;//na wstępie będzie zaznaczona pierwsza grupa, z indexem 0
         }
-
 
         private void RefreshDiary()
         {
